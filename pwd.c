@@ -26,8 +26,7 @@ int main()
 	perror("fd");
 	return -1;
     }
-    len = strlen(buf);
-    fwrite(buf,sizeof(char),len,fd);
+    fwrite(buf,sizeof(char),strlen(buf),fd);
     fwrite("\r\n",sizeof(char),2,fd);
     
     printf("%s\n",P);
