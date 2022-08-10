@@ -2,7 +2,7 @@
 
 int main()
 {
-    printf("Hello world\n");
+    printf("git test\n");
     return 0;
 }
 
