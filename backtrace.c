@@ -18,6 +18,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+extern int lib_test(void);
+
 #define BACKTRACE_BUF_SIZE          128
 
 void SigSegv_handler(int signal)
@@ -38,7 +40,14 @@ void SigSegv_handler(int signal)
         DEF_PRT_INFO(DEF_TAG,"The signal type: Illegal instruction!\n");
         break;
     case SIGSEGV: // 11:
+    {
+        char buff[64] = {0x00};
+
+        sprintf(buff,"cat /proc/%d/maps", getpid());
+        system((const char*) buff);
+
         DEF_PRT_INFO(DEF_TAG,"The signal type: Segmentation fault!\n");
+    }
         break;
     case SIGBUS: // 7:
         DEF_PRT_INFO(DEF_TAG,"The signal type: Bus error!\n");
@@ -117,20 +126,17 @@ void SigSegv_handler(int signal)
 
 void test(void)
 {
-    int i;
-    char buf[5];
+    char buf[4];
 
-    for(i = 0;i < 7;i++)
-    {
-        buf[i] = i;
-        DEF_PRT_INFO(DEF_TAG,"buf[%d]: %d\n",i,i);
-    }
+
+    sprintf(buf,"%s",45);
+
 }
 #endif
 
 void main(void)
 {
-    signal(SIGSEGV, SigSegv_handler);
+//    signal(SIGSEGV, SigSegv_handler);
     signal(SIGILL, SigSegv_handler);
     signal(SIGBUS, SigSegv_handler);
     signal(SIGFPE, SigSegv_handler);
@@ -151,7 +157,9 @@ void main(void)
     signal(SIGUSR1, SigSegv_handler);
     signal(SIGUSR2, SigSegv_handler);
 
-    test();
+    lib_test();
+//    test();
+
 
     return;
 }
