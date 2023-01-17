@@ -65,7 +65,8 @@ unsigned int make_a_fortune_day(void)
         break;
     }
 
-    date_val = t + week - (stime->tm_hour * 3600) - (stime->tm_min * 60) - (stime->tm_sec);
+    date_val = t + week - (stime->tm_hour * 3600) - (stime->tm_min * 60) - stime->tm_sec;
+    date_val += (9 * 60 * 60) + (15 * 60);
 
     return date_val;
 }
