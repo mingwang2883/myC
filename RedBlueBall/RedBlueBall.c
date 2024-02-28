@@ -29,12 +29,13 @@ void bubbleSort(int arr[], int len)
 unsigned int make_a_fortune_day(void)
 {
     int week = 0;
-    unsigned int date_val;
+    unsigned int date_val = 0;
 
     time_t t = time(NULL);
     struct tm* stime = localtime(&t);
 
     week = stime->tm_wday;
+    date_val = t;
 
     switch(week)
     {
@@ -58,15 +59,11 @@ unsigned int make_a_fortune_day(void)
         {
             happy_day = (7 - week);
         }
-        week += happy_day * 24 * 3600;
-
+        date_val += happy_day * 24 * 3600;
         printf("%d天后是开奖日,发财密码\n",happy_day);
     }
         break;
     }
-
-    date_val = t + week - (stime->tm_hour * 3600) - (stime->tm_min * 60) - stime->tm_sec;
-    date_val += (9 * 60 * 60) + (15 * 60);
 
     return date_val;
 }
@@ -77,6 +74,7 @@ int main(void)
     int blue_ball = 0;
     int red_ball[6];
     unsigned int date_val;
+    time_t t = time(NULL);
 
     memset(red_ball,0,sizeof(red_ball));
 
