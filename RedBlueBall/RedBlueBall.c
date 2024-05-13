@@ -74,7 +74,6 @@ int main(void)
     int blue_ball = 0;
     int red_ball[6];
     unsigned int date_val;
-    time_t t = time(NULL);
 
     memset(red_ball,0,sizeof(red_ball));
 
@@ -93,7 +92,7 @@ again:
                 {
                     if(red_ball[j] == red_ball[k])
                     {
-                        usleep(1000 * 1000);
+                        usleep(88 * 888);
                         goto again;
                     }
                 }
@@ -110,7 +109,7 @@ again:
 
         blue_ball = rand() % 16 + 1;
         printf("    蓝球: %02d\n",blue_ball);
-        sleep(1);
+        usleep(888 * 888);
     }
 
     return 0;
