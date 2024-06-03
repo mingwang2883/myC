@@ -29,21 +29,45 @@ void bubbleSort(int arr[], int len)
 unsigned int make_a_fortune_day(void)
 {
     int week = 0;
+    int hour = 0;
     unsigned int date_val = 0;
 
     time_t t = time(NULL);
     struct tm* stime = localtime(&t);
 
     week = stime->tm_wday;
+    hour = stime->tm_hour;
     date_val = t;
+
+    if(hour <= 20)
+    {
+        date_val += (20 - hour) * 60 * 60;
+    }
+    else if(hour >= 21)
+    {
+        date_val -= (hour - 21) * 60 * 60;
+    }
 
     switch(week)
     {
     case 0 :
+    {
+        date_val += 2 * 24 * 3600;
+        printf("2天后开奖日,发财密码\n");
+    }
+        break;
+
     case 2 :
+    {
+        date_val += 2 * 24 * 3600;
+        printf("2天后开奖日,发财密码\n");
+    }
+        break;
+
     case 4 :
     {
-        printf("今天是开奖日,发财密码\n");
+        date_val += 3 * 24 * 3600;
+        printf("3天后开奖日,发财密码\n");
     }
         break;
 
@@ -92,15 +116,15 @@ again:
                 {
                     if(red_ball[j] == red_ball[k])
                     {
-                        usleep(88 * 888);
+                        usleep(888);
                         goto again;
                     }
                 }
             }
+            usleep(8888);
         }
 
         bubbleSort(red_ball,6);
-
         printf("红球: ");
         for(j = 0;j < 6;j++)
         {
@@ -109,7 +133,7 @@ again:
 
         blue_ball = rand() % 16 + 1;
         printf("    蓝球: %02d\n",blue_ball);
-        usleep(888 * 888);
+        usleep(888888);
     }
 
     return 0;
